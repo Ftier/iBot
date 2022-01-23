@@ -1,0 +1,68 @@
+Kefler
+Functions:
+    Give players 'wallets'
+        - !wallet
+
+    provide a framework for transactions between players
+        - !pay
+        - !request (alias: !rq)
+
+    reward players for interacting with discord
+        - passive income over time
+        - bonus income rate for talking in vc
+        - bonus income for streaming
+        - bonus income for typing
+        - bonus income for reactions
+
+Objectives:
+    - robust (minimize dataloss on failiure)
+    - sql implementation
+    - local backups
+    - pseudo-'block chain' (for the memes)
+    - nfts
+
+constraints:
+    - discord.py api
+
+Player wallet info
+    player id
+    balance
+    transaction history(?)
+    
+
+!wallet:
+    if players have a wallet:
+        get players wallet balance
+        check for -p: (private). if -p is on:
+            send dm with player balance
+        otherwise:
+            send message to channel with wallet balance
+    otherwise:
+        give player a wallet with a balance of 0
+
+!pay <player> <value>:
+    create value variable
+    get both players wallets
+    subtract value from author
+    add value to player
+
+!request <player> value
+    create var value
+    send dm to player with value confirmation
+    if {
+    approved
+    and value < wallet_balance
+    and time_since_request < 5 minutes
+    }:
+        get both player wallets
+        subtract value from player
+        add value to author
+    else:
+        close request
+
+on message sent:
+    add bonus to author's wallet
+
+on reaction sent:
+    add bonus to author's wallet
+
