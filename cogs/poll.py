@@ -5,9 +5,14 @@ import discord
 import emoji
 import re
 import requests
+import json
 from discord.ext import commands
 
-
+with open("config.json","r") as f:
+    jString = f.read()
+    data = json.loads(jString)
+    api_key = data["strawKey"]
+    f.close()
 
 class poll(commands.Cog):
     
@@ -15,7 +20,7 @@ class poll(commands.Cog):
         self.bot = bot
 
     #commands go here:
-    @commands.command()
+    @commands.command(name="poll", usage='<"Question (in quotes)"> option 1, option 2, option 3')
     async def poll(self,ctx):
         '''Create a quick poll, using reactions to cast votes. This poll is **NOT anonymous**. - usage: poll <"Insert question between quotes"> option 1, option 2, option 3'''
 
@@ -60,8 +65,6 @@ class poll(commands.Cog):
             if i[0] == " ":
                 options[j] = i[1:]
             j+=1
-
-        api_key = 'P1PDKGJC2D91GRP1AZYC9WKPY36ORKJ2';
 
         #create data packet
         data = {

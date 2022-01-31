@@ -123,3 +123,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.cogs/config.json
+
+.cogs/data.json
+
+.cogs/*.json
