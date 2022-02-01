@@ -129,3 +129,5 @@ dmypy.json
 .cogs/data.json
 
 .cogs/*.json
+cogs/data.json
+*.json
