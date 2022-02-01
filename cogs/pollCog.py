@@ -14,7 +14,7 @@ with open("config.json","r") as f:
     api_key = data["strawKey"]
     f.close()
 
-class poll(commands.Cog):
+class pollCog(commands.Cog):
     
     def __init__(self,bot):
         self.bot = bot
@@ -50,7 +50,7 @@ class poll(commands.Cog):
         for i in range(j):
             await msg.add_reaction(emoji.emojize(num2emote[i+1],use_aliases=True))
 
-    @commands.command()
+    @commands.command(name="strawpoll",usage='<"Question (in quotes)"> option 1, option 2, option 3')
     async def strawpoll(self,ctx):
         '''Creates a poll using strawpoll, lists the options and provides a hyperlink to the poll.'''
         #initialize vars
@@ -105,4 +105,4 @@ class poll(commands.Cog):
 
 
 def setup(bot):
-        bot.add_cog(poll(bot))
+        bot.add_cog(pollCog(bot))

@@ -11,17 +11,19 @@ import os
 import json
 from discord.ext import commands
 
+with open("config.json","r") as f:
+    jString = f.read()
+    data = json.loads(jString)
+    api_key = data["discordKey"]
+    prefix = data["prefix"]
+    f.close()
+
 
 bot = commands.Bot(command_prefix=".")
 
 intents = discord.Intents.default()
 intents.members = True
 
-with open("config.json","r") as f:
-    jString = f.read()
-    data = json.loads(jString)
-    api_key = data["discordKey"]
-    f.close()
 
 #TODO: put role name in config.json (edit json from within discord perhaps?)
 def hasRole(ctx: commands.Context, minRole:str = "Bot Daddy"):
