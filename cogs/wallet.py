@@ -131,3 +131,27 @@ class walletUtils:
         else:
             return False
 
+    def add(playerId:int,amount):
+        data = walletUtils.loadJson()
+        data[str(playerId)]["balance"] = data[str(playerId)]["balance"] + amount
+        walletUtils.saveJson(data)
+
+    def addFlag(playerId:int,flagName:str, state:bool=False):
+        playerData = walletUtils.loadJson()
+        playerData[str(playerId)].update({str(flagName + "Flag") : state})
+        walletUtils.saveJson(playerData)
+
+    def setFlag(playerId:int,flagName:str,state):
+        walletUtils.addFlag(playerId,flagName,state)
+
+    def getFlag(playerId:int,flagName:str):
+        fName = flagName + "Flag"
+        try:
+            playerData = walletUtils.loadJson()
+            flagResult = playerData[str(playerId)][fName]
+        except KeyError:
+            walletUtils.addFlag(playerId,flagName)
+            #print("created flag")
+            playerData = walletUtils.loadJson()
+            flagResult = playerData[str(playerId)][fName]
+        return bool(flagResult)
